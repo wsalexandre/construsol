@@ -1,0 +1,56 @@
+object Main: TMain
+  Left = 0
+  Top = 0
+  Caption = 'Main'
+  ClientHeight = 838
+  ClientWidth = 1067
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OnShow = FormShow
+  TextHeight = 13
+  object btnProduto: TBitBtn
+    Left = 488
+    Top = 216
+    Width = 121
+    Height = 41
+    Caption = 'PRODUTOS'
+    TabOrder = 0
+    OnClick = btnProdutoClick
+  end
+  object btnVenda: TBitBtn
+    Left = 632
+    Top = 216
+    Width = 121
+    Height = 41
+    Caption = 'VENDA'
+    TabOrder = 1
+    OnClick = btnVendaClick
+  end
+  object btnUsuario: TBitBtn
+    Left = 783
+    Top = 216
+    Width = 114
+    Height = 41
+    Caption = 'Usuario'
+    TabOrder = 2
+    OnClick = btnUsuarioClick
+  end
+  object dm: TFDConnection
+    Left = 536
+    Top = 520
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    VendorLib = 'C:\Programas\COSTRUSOL\libmysql.dll'
+    Left = 528
+    Top = 440
+  end
+  object FDQuery1: TFDQuery
+    Connection = dm
+    Left = 696
+    Top = 512
+  end
+end

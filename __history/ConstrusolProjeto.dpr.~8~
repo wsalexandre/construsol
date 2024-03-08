@@ -1,0 +1,22 @@
+program ConstrusolProjeto;
+
+uses
+  Vcl.Forms,
+  Construsol in 'Construsol.pas' {Main},
+  ORM in 'DATA\ORM.pas',
+  UModel in 'MODELS\UModel.pas',
+  UPaginate in 'COMUNS\UPaginate.pas',
+  URepositorioGenerico in 'DATA\REPOSITORIO\URepositorioGenerico.pas',
+  FrmCadastroProduto in 'UI\FrmCadastroProduto.pas' {_FrmProdutos},
+  Produto in 'MODELS\Produto.pas',
+  URepositorioProduto in 'DATA\REPOSITORIO\URepositorioProduto.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(T_FrmProdutos, _FrmProdutos);
+  Application.Run;
+end.

@@ -1,0 +1,43 @@
+unit VendaDetail;
+
+interface
+
+uses
+  UModel;
+
+type
+  TVendaDetail = class(TModel)
+  private
+    FID: Integer;
+    FVendaID: Integer;
+    FProduto: Integer;
+    FDataHora: TDateTime;
+    FQuantidade: Double;
+    FValor: Double;
+    FTotal: Double;
+    FCancelado: boolean;
+  public
+    property ID: Integer read FID write FID;
+    property VendaID: Integer read FVendaID write FVendaID;
+    property Produto: Integer read FProduto write FProduto;
+    property DataHora: TDateTime read FDataHora write FDataHora;
+    property Quantidade: Double read FQuantidade write FQuantidade;
+    property Valor: Double read FValor write FValor;
+    property Total: Double read FTotal write FTotal;
+    property Cancelado: boolean read FCancelado write FCancelado;
+
+    constructor Create;
+  end;
+
+implementation
+
+{ TVendaDetail }
+
+constructor TVendaDetail.Create;
+begin
+   key := 'Id';
+   foreignKey := 'VendaID';
+   AutoIncremment := False;
+end;
+
+end.

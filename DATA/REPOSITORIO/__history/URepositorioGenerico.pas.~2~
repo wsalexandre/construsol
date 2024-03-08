@@ -1,0 +1,81 @@
+unit URepositorioGenerico;
+
+interface
+
+uses
+  UModel,UPaginate,System.Generics.Collections,
+  ORM;
+
+type TRepositorioGenerico<T:class,constructor> = class(TInterfacedObject)
+    private
+      FContextConnection : TORMFramwork;
+
+    public
+      procedure  Add(pObject : TModel);
+      procedure  Remove(pObject: TModel);
+      procedure  Update(pObject : TModel);
+      procedure  SaveChange();
+      procedure  ExecuteQuery(pQuery : string);
+      function   GetAll(pPaginate : TPaginate): TObjectList<T>;
+      function   GetById(pId : integer): T;
+      function   GetItemByForeignKey(pForeignKey : integer): T;
+      function   GetListByForeignKey(pForeignKey : integer): TObjectList<T>;
+      function   SQLQuery(pQuery : string): TObjectList<T>;
+end;
+
+implementation
+
+{ TRepositorioGenerico<T> }
+
+procedure TRepositorioGenerico<T>.Add(pObject: TModel);
+begin
+     DbContext.Add(pObject);
+end;
+
+procedure TRepositorioGenerico<T>.ExecuteQuery(pQuery: string);
+begin
+    DbContext.ExecuteQuery(pQuery);
+end;
+
+function TRepositorioGenerico<T>.GetAll(pPaginate: TPaginate): TObjectList<T>;
+begin
+   Result := DbContext.GetAll<T>(pPaginate);
+end;
+
+function TRepositorioGenerico<T>.GetById(pId: integer): T;
+begin
+    Result := DbContext.GetById<T>(pId)
+end;
+
+function TRepositorioGenerico<T>.GetItemByForeignKey(pForeignKey: integer): T;
+begin
+    Result := DbContext.GetItemByForeignKey<T>(pForeignKey);
+end;
+
+function TRepositorioGenerico<T>.GetListByForeignKey(
+  pForeignKey: integer): TObjectList<T>;
+begin
+     Result := DbContext.GetListByForeignKey<T>(pForeignKey);
+end;
+
+procedure TRepositorioGenerico<T>.Remove(pObject: TModel);
+begin
+      DbContext.Remove(pObject);
+end;
+
+procedure TRepositorioGenerico<T>.SaveChange;
+begin
+     DbContext.SaveChange;
+end;
+
+function TRepositorioGenerico<T>.SQLQuery(pQuery: string): TObjectList<T>;
+begin
+    Result := DbContext.SQLQuery<T>(pQuery);
+end;
+
+procedure TRepositorioGenerico<T>.Update(pObject: TModel);
+begin
+     DbContext.Update(pObject);
+end;
+
+end.

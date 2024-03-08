@@ -1,0 +1,147 @@
+unit FrmVendaMaster;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.Grids, System.Generics.Collections,
+  VendaMaster, VendaDTO;
+
+type
+  T_FrmVendaMaster = class(TForm)
+    GridVendaLista: TStringGrid;
+    btnAbrirVenda: TBitBtn;
+    btnNovaVenda: TBitBtn;
+    procedure FormShow(Sender: TObject);
+    procedure btnNovaVendaClick(Sender: TObject);
+    procedure GridVendaListaSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure btnAbrirVendaClick(Sender: TObject);
+  private
+    { Private declarations }
+    LinhaSelecionada : Integer;
+    procedure GerarGrid(pVendaMaster : TObjectList<TVendaMaster>);
+
+  public
+    { Public declarations }
+     class function  AtualizarVendaDTO(pId : integer) : TVendaDTO;
+  end;
+
+var
+  _FrmVendaMaster: T_FrmVendaMaster;
+
+implementation
+
+uses
+  URepositorioVendaMaster, UPaginate, FrmVenda, URepositorioVendaDetail,
+  VendaDetail;
+
+{$R *.dfm}
+
+{ TForm1 }
+
+class function T_FrmVendaMaster.AtualizarVendaDTO(pId: integer): TVendaDTO;
+var
+    RepositorioVendaMaster : TRepositorioVendaMaster;
+    RepositorioVendaDetail : TRepositorioVendaDetail;
+    DTOvenda :  TVendaDTO;
+begin
+      try
+          RepositorioVendaMaster := TRepositorioVendaMaster.Create;
+          RepositorioVendaDetail := TRepositorioVendaDetail.Create;
+          DTOvenda :=  TVendaDTO.Create;
+
+          DTOvenda.VendaMaster  := RepositorioVendaMaster.GetById(pId);
+          DTOvenda.VendaDetail  := RepositorioVendaDetail.GetListByForeignKey(pId);
+      finally
+          RepositorioVendaMaster.Free;
+          RepositorioVendaDetail.Free;
+      end;
+
+      Result :=  DTOvenda;
+end;
+
+procedure T_FrmVendaMaster.btnAbrirVendaClick(Sender: TObject);
+begin
+    if LinhaSelecionada = 0 then
+      Exit;
+      _frmVenda := T_frmVenda.Create(Self,LinhaSelecionada);
+      _frmVenda.ShowModal;
+      _frmVenda.Release;
+end;
+
+procedure T_FrmVendaMaster.btnNovaVendaClick(Sender: TObject);
+var
+   RepositorioVendaMaster : TRepositorioVendaMaster;
+   vendaMaster : TVendaMaster;
+   documento : integer;
+begin
+    vendaMaster := TVendaMaster.Create;
+    vendaMaster.CodigoCliente := 1;
+    vendaMaster.DataHora := StrToDate(DateToStr(now));
+    vendaMaster.Total    := 0.00;
+    vendaMaster.Cancelado:= False;
+
+    try
+       RepositorioVendaMaster := TRepositorioVendaMaster.Create;
+       RepositorioVendaMaster.Add(vendaMaster);
+       RepositorioVendaMaster.SaveChange;
+    finally
+       documento:=  RepositorioVendaMaster.ObterIdUltimaVenda;
+       RepositorioVendaMaster.Free;
+       vendaMaster.Free;
+    end;
+
+    _frmVenda := T_frmVenda.Create(Self);
+    _frmVenda.txtDocumento.Text :=  documento.ToString();
+    _frmVenda.ShowModal;
+    _frmVenda.Release;
+
+end;
+
+procedure T_FrmVendaMaster.FormShow(Sender: TObject);
+var
+   VendaMaster : TObjectList<TVendaMaster>;
+   RepositorioVendaMaster : TRepositorioVendaMaster;
+begin
+    try
+       RepositorioVendaMaster := TRepositorioVendaMaster.Create;
+       VendaMaster := RepositorioVendaMaster.GetAll(TPaginate.Create(0,100,0,0));
+       GerarGrid(VendaMaster);
+    finally
+        RepositorioVendaMaster.Free;
+        VendaMaster.Free;
+    end;
+
+end;
+
+procedure T_FrmVendaMaster.GerarGrid(pVendaMaster: TObjectList<TVendaMaster>);
+var
+  v : TVendaMaster;
+begin
+    GridVendaLista.Cells[0,0] :=  'ID';
+    GridVendaLista.Cells[1,0] :=  'CÓDIGO CLIENTE';
+    GridVendaLista.Cells[2,0] :=  'DATA';
+    GridVendaLista.Cells[3,0] :=  'TOTAL';
+    GridVendaLista.Cells[4,0] :=  'CANCELADO';
+
+    GridVendaLista.RowCount := 1;
+    for v in pVendaMaster do
+    begin
+         GridVendaLista.Cells[0,GridVendaLista.RowCount] :=  v.ID.ToString();
+         GridVendaLista.Cells[1,GridVendaLista.RowCount] :=  v.CodigoCliente.ToString();
+         GridVendaLista.Cells[2,GridVendaLista.RowCount] :=  DateToStr(V.DataHora);
+         GridVendaLista.Cells[3,GridVendaLista.RowCount] :=  FloatToStr(v.Total);
+         GridVendaLista.Cells[4,GridVendaLista.RowCount] :=  v.Cancelado.ToString;
+         GridVendaLista.RowCount := GridVendaLista.RowCount +1;
+    end;
+
+end;
+
+procedure T_FrmVendaMaster.GridVendaListaSelectCell(Sender: TObject; ACol,
+  ARow: Integer; var CanSelect: Boolean);
+begin
+    LinhaSelecionada := ARow;
+end;
+
+end.

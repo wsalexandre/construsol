@@ -1,0 +1,17 @@
+unit VendaDTO;
+
+interface
+
+uses
+  VendaMaster, VendaDetail,System.Generics.Collections;
+
+Type
+TVendaDTO = class
+    public
+       VendaMaster : TVendaMaster;
+       VendaDetail : TObjectList<TVendaDetail>;
+end;
+
+implementation
+
+end.

@@ -1,0 +1,81 @@
+object Main: TMain
+  Left = 0
+  Top = 0
+  Caption = 'Main'
+  ClientHeight = 719
+  ClientWidth = 1034
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OnShow = FormShow
+  TextHeight = 13
+  object btnProduto: TBitBtn
+    Left = 488
+    Top = 216
+    Width = 121
+    Height = 41
+    Caption = 'PRODUTOS'
+    TabOrder = 0
+    OnClick = btnProdutoClick
+  end
+  object btnVenda: TBitBtn
+    Left = 632
+    Top = 216
+    Width = 121
+    Height = 41
+    Caption = 'VENDA'
+    TabOrder = 1
+    OnClick = btnVendaClick
+  end
+  object btnUsuario: TBitBtn
+    Left = 783
+    Top = 216
+    Width = 114
+    Height = 41
+    Caption = 'Usuario'
+    TabOrder = 2
+    OnClick = btnUsuarioClick
+  end
+  object dm: TFDConnection
+    Params.Strings = (
+      'Database=construsol'
+      'User_Name=root'
+      'Password=p@ssw0rd'
+      'Server=localhost'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Left = 696
+    Top = 376
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    VendorLib = 'C:\Programas\COSTRUSOL\libmysql.dll'
+    Left = 840
+    Top = 360
+  end
+  object MainMenu1: TMainMenu
+    Left = 248
+    Top = 64
+    object Cadastro1: TMenuItem
+      Caption = 'Cadastro'
+      object Produtos1: TMenuItem
+        Caption = 'Produtos'
+      end
+      object Usurios1: TMenuItem
+        Caption = 'Usu'#225'rios'
+      end
+    end
+    object Operaes1: TMenuItem
+      Caption = 'Opera'#231#245'es'
+      object Venda1: TMenuItem
+        Caption = 'Venda'
+      end
+    end
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+    end
+  end
+end

@@ -1,0 +1,181 @@
+object _FrmProdutos: T_FrmProdutos
+  Left = 0
+  Top = 0
+  ClientHeight = 497
+  ClientWidth = 550
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Position = poMainFormCenter
+  OnShow = FormShow
+  TextHeight = 13
+  object lblTitulo: TLabel
+    Left = 8
+    Top = 10
+    Width = 180
+    Height = 19
+    Caption = 'CADASTRO DE PRODUTOS'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Consolas'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnCadastrar: TBitBtn
+    Left = 432
+    Top = 448
+    Width = 105
+    Height = 41
+    Caption = 'CADASTRAR'
+    TabOrder = 0
+    OnClick = btnCadastrarClick
+  end
+  object GridProdutos: TStringGrid
+    Left = 8
+    Top = 35
+    Width = 529
+    Height = 232
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect]
+    TabOrder = 1
+    OnClick = GridProdutosClick
+  end
+  object btnAlterar: TBitBtn
+    Left = 328
+    Top = 448
+    Width = 98
+    Height = 41
+    Caption = 'ALTERAR'
+    TabOrder = 2
+    OnClick = btnAlterarClick
+  end
+  object btnExcluir: TBitBtn
+    Left = 224
+    Top = 448
+    Width = 98
+    Height = 41
+    Caption = 'EXCLUIR'
+    TabOrder = 3
+    OnClick = btnExcluirClick
+  end
+  object pnlCenter: TPanel
+    Left = 13
+    Top = 273
+    Width = 529
+    Height = 169
+    TabOrder = 4
+    object Label1: TLabel
+      Left = 64
+      Top = 25
+      Width = 36
+      Height = 19
+      Caption = 'Nome'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 19
+      Top = 58
+      Width = 81
+      Height = 19
+      Caption = 'Categoria'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 55
+      Top = 90
+      Width = 45
+      Height = 19
+      Caption = 'Pre'#231'o'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 55
+      Top = 123
+      Width = 63
+      Height = 19
+      Caption = 'Estoque'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Nome: TMaskEdit
+      Left = 133
+      Top = 22
+      Width = 288
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      MaxLength = 50
+      ParentFont = False
+      TabOrder = 0
+      Text = ''
+    end
+    object Categoria: TMaskEdit
+      Left = 133
+      Top = 55
+      Width = 84
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Preco: TMaskEdit
+      Left = 133
+      Top = 88
+      Width = 84
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object Estoque: TMaskEdit
+      Left = 133
+      Top = 121
+      Width = 84
+      Height = 27
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      Text = ''
+    end
+  end
+end

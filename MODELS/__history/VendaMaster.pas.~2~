@@ -1,0 +1,36 @@
+unit VendaMaster;
+
+interface
+
+uses
+  UModel;
+
+ type
+  TVendaMaster = class(TModel)
+  private
+    FID: Integer;
+    FCodigoCliente: Integer;
+    FDataHora: TDateTime;
+    FTotal: Double;
+    FCancelado: boolean;
+  public
+    property ID: Integer read FID write FID;
+    property CodigoCliente: Integer read FCodigoCliente write FCodigoCliente;
+    property DataHora: TDateTime read FDataHora write FDataHora;
+    property Total: Double read FTotal write FTotal;
+    property Cancelado: boolean read FCancelado write FCancelado;
+
+    constructor Create;
+  end;
+
+implementation
+
+{ TVendaMaster }
+
+constructor TVendaMaster.Create;
+begin
+   key := 'Id';
+   AutoIncremment := False;
+end;
+
+end.

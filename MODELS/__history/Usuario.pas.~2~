@@ -1,0 +1,32 @@
+unit Usuario;
+
+interface
+
+uses
+  UModel;
+
+type
+  TUsuario = class(TModel)
+  private
+    FID: Integer;
+    FNome: string;
+    FSenha: string;
+  public
+    property ID: Integer read FID write FID;
+    property Nome: string read FNome write FNome;
+    property Senha: string read FSenha write FSenha;
+
+    constructor Create;
+  end;
+
+implementation
+
+{ TUsuario }
+
+constructor TUsuario.Create;
+begin
+   key := 'ID';
+   AutoIncremment := False;
+end;
+
+end.

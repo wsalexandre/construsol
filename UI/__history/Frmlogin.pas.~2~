@@ -1,0 +1,70 @@
+unit Frmlogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Mask;
+
+type
+  T_FrmLogin = class(TForm)
+    pnlTop: TPanel;
+    pnlBottom: TPanel;
+    btnCancel: TButton;
+    btnOK: TButton;
+    txtUsuario: TMaskEdit;
+    lblNome: TLabel;
+    txtSenha: TMaskEdit;
+    lblSenha: TLabel;
+    procedure btnOKClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function ValidarLogin(const Usuario, Senha: string): Boolean;
+  end;
+
+var
+  _FrmLogin: T_FrmLogin;
+
+implementation
+
+uses
+  udm;
+
+{$R *.dfm}
+
+{ Tform_login }
+
+procedure T_FrmLogin.btnOKClick(Sender: TObject);
+begin
+
+  if ValidarLogin(txtUsuario.Text, txtSenha.Text) = True then
+    Self.ModalResult := mrOk
+  else
+  begin
+    Application.MessageBox('Usuário não autorizado.', 'Erro no acesso', MB_OK + MB_ICONERROR);
+    self.ModalResult := mrNone;
+  end;
+
+end;
+
+procedure T_FrmLogin.FormShow(Sender: TObject);
+begin
+  if Self.Visible then txtUsuario.SetFocus;
+end;
+
+function T_FrmLogin.ValidarLogin(const Usuario, Senha: string): Boolean;
+begin
+  _dm.qry_padrao.SQL.Text := 'SELECT COUNT(*) FROM usuario WHERE nome = :nome AND pswd = md5(:pswd)';
+  _dm.qry_padrao.ParamByName('nome').AsString := Usuario;
+  _dm.qry_padrao.ParamByName('pswd').AsString := Senha;
+  _dm.qry_padrao.Open;
+
+  Result := _dm.qry_padrao.Fields[0].AsInteger > 0;
+
+  _dm.qry_padrao.Close;
+end;
+
+end.

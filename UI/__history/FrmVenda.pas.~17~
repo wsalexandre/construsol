@@ -1,0 +1,105 @@
+unit FrmVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.Grids,  Vcl.Mask, VendaDTO;
+
+type
+  T_frmVenda = class(TForm)
+    lbltitulo: TLabel;
+    txtCliente: TEdit;
+    txtNomeCliente: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    txtDocumento: TEdit;
+    Label4: TLabel;
+    GridVendaDet: TStringGrid;
+    btnExc: TBitBtn;
+    Panel1: TPanel;
+    txtCodProd: TEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    btniNCLUIR: TBitBtn;
+    txtTotal: TEdit;
+    txtQtd: TEdit;
+    txtPreco: TEdit;
+    txtData: TEdit;
+    procedure btniNCLUIRClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure AtualizarTelaVenda(pVendaDTO : TVendaDTO);
+    constructor Create(AOwner: TComponent; IdVenda : integer); overload;
+  end;
+
+var
+  _frmVenda: T_frmVenda;
+
+implementation
+
+uses
+  VendaDetail, URepositorioVendaDetail, FrmVendaMaster;
+
+{$R *.dfm}
+
+procedure T_frmVenda.AtualizarTelaVenda(pVendaDTO: TVendaDTO);
+var
+  total : Double;
+  v : TVendaDetail;
+begin
+    txtDocumento.Text := pVendaDTO.VendaMaster.ID.ToString();
+    txtCliente.Text   := pVendaDTO.VendaMaster.CodigoCliente.ToString();
+    txtData.Text      := DateToStr(pVendaDTO.VendaMaster.DataHora);
+
+    total := 0;
+    for v in pVendaDTO.VendaDetail do
+      total := total + v.Valor;
+
+    txtTotal.Text := CurrToStr(total);
+end;
+
+procedure T_frmVenda.btniNCLUIRClick(Sender: TObject);
+var
+  vendaDet : TVendaDetail;
+  RepositorioVendaDetail : TRepositorioVendaDetail;
+begin
+formatsettings.DecimalSeparator :='.';
+     vendaDet := TVendaDetail.Create;
+     vendaDet.VendaID    := StrToInt(txtDocumento.Text);
+     vendaDet.Produto    := StrToInt(TxtCodProd.Text);
+     vendaDet.Quantidade := 5.00;//StrToFloat(formatFloat('#,###0.00',StrToFloat(txtQtd.Text)) );
+     vendaDet.Valor      := 15.50;//StrToFloat(formatFloat('#,###0.00',StrToFloat(txtPreco.Text)));
+     vendaDet.Total      := vendaDet.Valor *vendaDet.Quantidade;//StrToFloat(formatFloat('#,###0.00',vendaDet.Valor *vendaDet.Quantidade ));
+     vendaDet.DataHora   := strToDate(DateToStr(now));
+     vendaDet.Cancelado :=False;
+
+     try
+        RepositorioVendaDetail := TRepositorioVendaDetail.Create;
+        RepositorioVendaDetail.Add(vendaDet);
+        RepositorioVendaDetail.SaveChange;
+     finally
+        vendaDet.Free;
+        RepositorioVendaDetail.Free;
+     end;
+
+end;
+
+constructor T_frmVenda.Create(AOwner: TComponent; IdVenda: integer);
+begin
+  inherited Create(AOwner);
+    T_FrmVendaMaster.AtualizarVendaDTO(IdVenda);
+end;
+
+procedure T_frmVenda.FormShow(Sender: TObject);
+begin
+//AtualizarTelaVenda();
+end;
+
+end.

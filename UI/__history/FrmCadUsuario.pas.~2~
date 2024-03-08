@@ -1,0 +1,61 @@
+unit FrmCadUsuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TForm1 = class(TForm)
+    txtUsuario: TEdit;
+    txtSenha: TEdit;
+    txtConfSenha: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    btnCadastrar: TBitBtn;
+    procedure btnCadastrarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses
+  URepositorioUsuario, Usuario;
+
+{$R *.dfm}
+
+procedure TForm1.btnCadastrarClick(Sender: TObject);
+var
+  RepositorioUsuario : TRepositorioUsuario;
+  Usuario : TUsuario;
+begin
+    if txtUsuario.Text = string.empty then
+        Exit;
+
+    if txtSenha.Text = string.empty then
+        Exit;
+
+    if txtSenha.Text <> txtConfSenha.Text then
+        Exit;
+
+     try
+        Usuario := TUsuario.Create;
+        RepositorioUsuario := TRepositorioUsuario.Create;
+        RepositorioUsuario.Add(Usuario);
+     finally
+         RepositorioUsuario.Free;
+         Usuario.Free;
+     end;
+
+
+end;
+
+end.

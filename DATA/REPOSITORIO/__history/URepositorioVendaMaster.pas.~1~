@@ -1,0 +1,15 @@
+unit URepositorioVendaMaster;
+
+interface
+
+uses
+  URepositorioGenerico,VendaMaster;
+
+type
+TRepositorioVendaMaster = class(TRepositorioGenerico<TVendaMaster>)
+
+end;
+
+implementation
+
+end.

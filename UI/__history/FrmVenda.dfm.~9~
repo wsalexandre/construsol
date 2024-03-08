@@ -1,0 +1,175 @@
+object _frmVenda: T_frmVenda
+  Left = 0
+  Top = 0
+  Caption = '_frmVenda'
+  ClientHeight = 593
+  ClientWidth = 1040
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbltitulo: TLabel
+    Left = 32
+    Top = 16
+    Width = 57
+    Height = 19
+    Caption = 'VENDA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 53
+    Width = 41
+    Height = 13
+    Caption = 'CLIENTE'
+  end
+  object Label2: TLabel
+    Left = 36
+    Top = 103
+    Width = 27
+    Height = 13
+    Caption = 'DATA'
+  end
+  object Label3: TLabel
+    Left = 533
+    Top = 107
+    Width = 48
+    Height = 13
+    Caption = 'TOTAL R$'
+  end
+  object Label4: TLabel
+    Left = 744
+    Top = 53
+    Width = 64
+    Height = 13
+    Caption = 'DOCUMENTO'
+  end
+  object txtCliente: TEdit
+    Left = 32
+    Top = 72
+    Width = 89
+    Height = 21
+    TabOrder = 0
+    Text = '0'
+  end
+  object txtNomeCliente: TEdit
+    Left = 132
+    Top = 72
+    Width = 530
+    Height = 21
+    TabOrder = 1
+    Text = '0'
+  end
+  object txtDocumento: TEdit
+    Left = 744
+    Top = 72
+    Width = 145
+    Height = 21
+    TabOrder = 2
+    Text = '0'
+  end
+  object GridVendaDet: TStringGrid
+    Left = 32
+    Top = 200
+    Width = 641
+    Height = 289
+    RowCount = 2
+    TabOrder = 3
+  end
+  object btnExc: TBitBtn
+    Left = 32
+    Top = 512
+    Width = 89
+    Height = 25
+    Caption = 'Excluir Prod'
+    TabOrder = 4
+  end
+  object Panel1: TPanel
+    Left = 712
+    Top = 208
+    Width = 249
+    Height = 281
+    TabOrder = 5
+    object Label5: TLabel
+      Left = 57
+      Top = 18
+      Width = 49
+      Height = 13
+      Caption = 'PRODUTO'
+    end
+    object Label6: TLabel
+      Left = 57
+      Top = 68
+      Width = 66
+      Height = 13
+      Caption = 'QUANTIDADE'
+    end
+    object Label7: TLabel
+      Left = 60
+      Top = 132
+      Width = 34
+      Height = 13
+      Caption = 'PRE'#199'O'
+    end
+    object txtCodProd: TEdit
+      Left = 56
+      Top = 37
+      Width = 89
+      Height = 21
+      TabOrder = 0
+      Text = '0'
+    end
+    object btniNCLUIR: TBitBtn
+      Left = 56
+      Top = 184
+      Width = 145
+      Height = 44
+      Caption = 'INCLUIR'
+      TabOrder = 1
+      OnClick = btniNCLUIRClick
+    end
+    object txtQtd: TEdit
+      Left = 56
+      Top = 96
+      Width = 145
+      Height = 21
+      TabOrder = 2
+      Text = '0'
+    end
+    object txtPreco: TEdit
+      Left = 57
+      Top = 151
+      Width = 145
+      Height = 21
+      TabOrder = 3
+      Text = '0'
+    end
+  end
+  object txtTotal: TEdit
+    Left = 608
+    Top = 104
+    Width = 145
+    Height = 21
+    TabOrder = 6
+    Text = '0'
+  end
+  object txtData: TEdit
+    Left = 36
+    Top = 122
+    Width = 145
+    Height = 21
+    TabOrder = 7
+    Text = '0'
+  end
+end
